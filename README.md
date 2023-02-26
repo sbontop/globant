@@ -22,8 +22,13 @@ To run the project, you will need to have the following software installed on yo
 3. Set up the environment variables by creating a .env file in the project root directory with the following values:
 `touch .env`
 And add the following:
-POKEAPI_BASE_URL=https://pokeapi.co/api/v2/
-CACHE_TTL=3600
+DEBUG=True
+SECRET_KEY=your-secret-key-here
+REDIS_HOST=redis
+POKEAPI_URL = "https://pokeapi.co/api/v2/berry"
+POKE_API_LIMIT = 100 # limit of items per page
+POKE_API_OFFSET = 0 # offset of items per page
+POKE_API_CACHE_TIMEOUT = 60 # cache timeout in seconds
 4. Run the project:
 `make dev`
 5. The API is now running and can be accessed at http://localhost:8000/. 
