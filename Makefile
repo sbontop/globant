@@ -40,6 +40,10 @@ deploy:
 	docker-compose -f docker-compose.prod.yml up --build -deploy
 
 PHONY: test
-test:
+test-dev:
 	@echo "Running pytest unit tests within Django docker container..."
 	docker-compose -f docker-compose.dev.yml run web pytest 
+
+test-prod:
+	@echo "Running pytest unit tests within Django docker container..."
+	docker-compose -f docker-compose.prod.yml run web pytest
