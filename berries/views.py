@@ -67,11 +67,14 @@ berry_schema = {
 @extend_schema(
     description="Return a JSON response containing statistics on all berries.",
     responses={
-        200: berry_schema,
-        500: {
-            "description": "Server Error",
-            "content": {"application/json": {"schema": {"type": "string"}}},
-        },
+        200: OpenApiResponse(
+            response=berry_schema,
+            description="A JSON response containing statistics on all berries.",
+        ),
+        500: OpenApiResponse(
+            response=OpenApiTypes.OBJECT,
+            description="A JSON response containing an error message",
+        ),
     },
 )
 @api_view(["GET"])
@@ -96,10 +99,10 @@ def all_berry_stats(request: HttpRequest) -> JsonResponse:
             response=OpenApiTypes.BINARY,
             description="An image/png response containing the histogram plot.",
         ),
-        500: {
-            "type": "string",
-            "description": "Error Occurred during the data retrieval or plot creation.",
-        },
+        500: OpenApiResponse(
+            response=OpenApiTypes.OBJECT,
+            description="A JSON response containing an error message and error code.",
+        ),
     },
 )
 @api_view(["GET"])
