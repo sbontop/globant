@@ -5,13 +5,8 @@ ENV PYTHONUNBUFFERED 1
 
 WORKDIR /code
 
-RUN pip install pipenv \
-    && pipenv run pip freeze > requirements.txt
+COPY Pipfile Pipfile.lock /code/
 
-COPY requirements.txt /code/
-
-RUN pipenv install -r requirements.txt --deploy 
+RUN pip install pipenv && pipenv install --system --deploy --ignore-pipfile
 
 COPY . /code/
-
-CMD ["./entrypoint.sh"]
