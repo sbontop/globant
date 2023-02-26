@@ -24,7 +24,7 @@ class PokeAPI:
 
     def _get(self, url: str) -> Dict[str, Any]:
         try:
-            response = self.session.get(url, timeout=os.getenv("POKE_API_LIMIT"))
+            response = self.session.get(url, timeout=int(os.getenv("POKE_API_LIMIT")))
             response.raise_for_status()
             return response.json()
         except requests.exceptions.RequestException as e:
@@ -36,7 +36,7 @@ class PokeAPI:
             ) from e
 
     def get_all_berries(self) -> List[Dict[str, Any]]:
-        url = f"{os.getenv('POKEAPI_URL')}?limit={os.getenv('POKE_API_LIMIT')}"
+        url = f"{os.getenv('POKEAPI_URL')}?limit={int(os.getenv('POKE_API_LIMIT'))}"
         data = self._get(url)
         return data.get("results", [])
 
