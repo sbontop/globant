@@ -30,7 +30,7 @@ POKE_API_LIMIT = 100 # limit of items per page
 POKE_API_OFFSET = 0 # offset of items per page
 POKE_API_CACHE_TIMEOUT = 60 # cache timeout in seconds
 4. Run the project:
-`make dev`
+`make dev` (Run `make prod` in case dev doesn't work)
 5. The API is now running and can be accessed at http://localhost:8000/. 
 Use the following endpoint to get Poke-berries statistics:
 - `curl http://localhost:8000/berry/all_berry_stats/`
@@ -43,7 +43,7 @@ To access the plot, open this URL in the browser:
 
 7. To run the tests, execute the command:
 
-`make test`
+`make test-dev` (Run `make test-prod` if you ran `make prod` above)
 
 ## Extra Features
 
