@@ -1,4 +1,5 @@
 import logging
+import os
 import statistics
 from collections import Counter
 from dataclasses import dataclass
@@ -6,7 +7,6 @@ from typing import Any, Dict, List
 
 import requests
 
-from .constants import LIMIT, POKEAPI_URL, TIMEOUT
 from .exceptions import PokeAPIError, StatisticsCalculationError
 
 logger = logging.getLogger()
@@ -24,7 +24,7 @@ class PokeAPI:
 
     def _get(self, url: str) -> Dict[str, Any]:
         try:
-            response = self.session.get(url, timeout=TIMEOUT)
+            response = self.session.get(url, timeout=os.getenv("POKE_API_LIMIT"))
             response.raise_for_status()
             return response.json()
         except requests.exceptions.RequestException as e:
@@ -36,7 +36,7 @@ class PokeAPI:
             ) from e
 
     def get_all_berries(self) -> List[Dict[str, Any]]:
-        url = f"{POKEAPI_URL}?limit={LIMIT}"
+        url = f"{os.getenv('POKEAPI_URL')}?limit={os.getenv('POKE_API_LIMIT')}"
         data = self._get(url)
         return data.get("results", [])
 
