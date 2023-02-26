@@ -1,7 +1,8 @@
 from django.core.cache import cache
 from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.shortcuts import render
-from drf_spectacular.utils import extend_schema
+from drf_spectacular.types import OpenApiTypes
+from drf_spectacular.utils import OpenApiResponse, extend_schema
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 
@@ -91,15 +92,13 @@ def all_berry_stats(request: HttpRequest) -> JsonResponse:
 @extend_schema(
     description="Return an HTTP response containing a histogram of berry growth times.",
     responses={
-        200: {
-            "description": "OK",
-            "content": {
-                "image/png": {"schema": {"type": "string", "format": "binary"}}
-            },
-        },
+        200: OpenApiResponse(
+            response=OpenApiTypes.BINARY,
+            description="An image/png response containing the histogram plot.",
+        ),
         500: {
-            "description": "Server Error",
-            "content": {"text/html": {"schema": {"type": "string"}}},
+            "type": "string",
+            "description": "Error Occurred during the data retrieval or plot creation.",
         },
     },
 )
