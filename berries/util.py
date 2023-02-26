@@ -62,7 +62,10 @@ class BerryData:
 def _calculate_growth_statistics(growth_times: List[int]) -> Dict[str, Any]:
     try:
         c = Counter(growth_times)
-        mode_growth_time = c.most_common(1)[0][0] if c else None
+        # Get the mode if there is one
+        mode_growth_time = (
+            c.most_common(1)[0][0] if c and c.most_common(1)[0][1] > 1 else None
+        )
         return {
             "min_growth_time": min(growth_times),
             "max_growth_time": max(growth_times),

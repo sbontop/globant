@@ -38,3 +38,8 @@ build-prod:
 deploy:
 	@echo "Deploying to production..."
 	docker-compose -f docker-compose.prod.yml up --build -deploy
+
+PHONY: test
+test:
+	@echo "Running pytest unit tests within Django docker container..."
+	docker-compose -f docker-compose.dev.yml run web pytest 
