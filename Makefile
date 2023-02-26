@@ -21,6 +21,7 @@ down:
 .PHONY: clean
 clean:
 	@echo "Cleaning up unused containers and images..."
+	make down; \
 	docker system prune -af
 
 .PHONY: build-dev
@@ -36,4 +37,4 @@ build-prod:
 .PHONY: deploy
 deploy:
 	@echo "Deploying to production..."
-	docker-compose -f docker-compose.prod.yml up --build -d
+	docker-compose -f docker-compose.prod.yml up --build -deploy
