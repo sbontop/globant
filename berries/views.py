@@ -106,6 +106,7 @@ def all_berry_stats(request: HttpRequest) -> JsonResponse:
     },
 )
 @api_view(["GET"])
+@permission_classes([AllowAny])
 def plot_growth_time_frequency(request: HttpRequest) -> HttpResponse:
     data = cache.get("plot_growth_time_frequency_data")
     if data is None:
