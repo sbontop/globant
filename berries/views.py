@@ -58,18 +58,15 @@ berry_schema = {
             },
             "description": "Statistics of growth times",
         },
-        "description": "A list of berries and their growth times with statistics",
     },
+    "description": "A list of berries and their growth times with statistics",
 }
 
 
 @extend_schema(
     description="Return a JSON response containing statistics on all berries.",
     responses={
-        200: {
-            "description": "OK",
-            "content": {"application/json": {"schema": berry_schema}},
-        },
+        200: berry_schema,
         500: {
             "description": "Server Error",
             "content": {"application/json": {"schema": {"type": "string"}}},
