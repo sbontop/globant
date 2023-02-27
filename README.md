@@ -23,7 +23,7 @@ To run the project, you will need to have the following software installed on yo
 `touch .env`
 And add the following:
 
-DEBUG=True.  
+DEBUG=True  
 SECRET_KEY=your-secret-key-here  
 REDIS_HOST=redis  
 POKEAPI_URL = "https://pokeapi.co/api/v2/berry"  
